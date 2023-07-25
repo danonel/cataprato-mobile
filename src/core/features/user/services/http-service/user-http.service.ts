@@ -6,12 +6,11 @@ import { User } from "../../user.entity"
 export class UserHttpService {
   constructor(private readonly client: HttpClient<User>) { }
 
-  baseUrl: string = process.env.BASE_URL || ""
 
   async create(user: CreateUserDTO): Promise<string> {
-    
+    const url = ''
     return await this.client.create({
-      url: this.baseUrl,
+      url: url,
       data: {
         email: user.email
       }
@@ -19,8 +18,9 @@ export class UserHttpService {
   }
 
   async findOne(id: string, options?: RequestConfig): Promise<ApiUserResponse> {
+    const url = ''
     const user = await this.client.getOne({
-      url: this.baseUrl,
+      url,
       id,
       ...options
     })
