@@ -1,7 +1,7 @@
-import { RequestConfig } from "../http/http-client";
-import { HttpUserClientSpy } from "./test/http-client.spy";
-import { UserHttpService } from "./user-http.service";
-import { User } from "./user.entity";
+import { RequestConfig } from "../../../../http/http-client";
+import { HttpUserClientSpy } from "./http-client.spy";
+import { UserHttpService } from "../user-http.service";
+import { User } from "../../../user.entity";
 
 
 describe('get-user', () => {
@@ -17,22 +17,21 @@ describe('get-user', () => {
   describe('findOne', () => {
 
     it("should return a promise when calling only with an id", async () => {
-      await userHttpService.create({
+      const newUserId = await userHttpService.create({
         email: 'asbaba',
 
       })
       const sut = jest.spyOn(userHttpService, 'findOne')
 
-      const user = await userHttpService.findOne('asbaba')
+      const user = await userHttpService.findOne(newUserId)
       expect(sut).toHaveBeenCalledTimes(1)
-      expect(sut).toHaveBeenCalledWith('asbaba')
+      expect(sut).toHaveBeenCalledWith(newUserId)
       expect(user).toBeInstanceOf(User)
   
     })
     it("should return a promise with id and options", async () => {
-      await userHttpService.create({
+      const newUserId = await userHttpService.create({
         email: 'asbaba',
-        id: 'asbaba'
       })
       const options: RequestConfig = {
         headers: {
@@ -41,16 +40,14 @@ describe('get-user', () => {
       }
       const sut = jest.spyOn(userHttpService, 'findOne')
 
-      const user = await userHttpService.findOne('asbaba', options)
+      const user = await userHttpService.findOne(newUserId, options)
       expect(sut).toHaveBeenCalledTimes(1)
-      expect(sut).toHaveBeenCalledWith('asbaba', { headers: { Authorization: 'asbaba' } })
+      expect(sut).toHaveBeenCalledWith(newUserId, { headers: { Authorization: 'asbaba' } })
       expect(user).toBeInstanceOf(User)
     })
     it('should throw a UserNotFound error when user not exists',async  () => {
-      const sut = jest.spyOn(userHttpService, 'findOne')
-
+      jest.spyOn(userHttpService, 'findOne')
       const user = userHttpService.findOne('asbaba')
-      
       expect(user).rejects.toThrow('user already exists')
     })
   })

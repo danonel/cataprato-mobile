@@ -1,13 +1,14 @@
 import axios from "axios"
-import { UserHttpClient } from "../http/http-client"
-import { UserHttpService } from "./user-http.service"
-import { UserService } from "./user.service"
+import { HttpClient } from "../http/http-client"
+import { UserHttpService } from "./services/http-service/user-http.service"
+import { GetUserByIdService } from "./services/get-one-user/get-user-by-id.service"
+import { User } from "./user.entity"
 
-export const userService = () => {
-  const client: UserHttpClient = {
+export const getUserById = () => {
+  const client: HttpClient<User> = {
     getOne: (props) => axios.get(`${props.url}/${props.id}`, props.options),
     create: (props) => axios.post(`${props.url}`, props.data),
   }
   const userHttpService = new UserHttpService(client)
-  return new UserService(userHttpService)
+  return new GetUserByIdService(userHttpService)
 }

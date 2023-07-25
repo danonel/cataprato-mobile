@@ -1,21 +1,17 @@
 import { AxiosRequestConfig } from "axios";
-import { User } from "../user/user.entity";
-import { CreateUserDTO } from "../user/dto/create-user.dto";
-
-
-export interface PostParams {
+export interface PostParams<T> {
   url: string;
-  data: CreateUserDTO
+  data: T
 }
 
 export interface GetOneParams {
-  id?: string
+  id: string
   url: string
   options?: RequestConfig
 }
 
 export type RequestConfig = AxiosRequestConfig
-export interface UserHttpClient {
-  getOne(props: GetOneParams) : Promise<User>
-  create(props: PostParams): Promise<string>
+export interface HttpClient<T> {
+  getOne(props: GetOneParams): Promise<T>
+  create(props: PostParams<Omit<T, 'id'>>): Promise<string>
 }

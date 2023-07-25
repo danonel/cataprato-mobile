@@ -1,3 +1,8 @@
+import { randomUUID } from 'crypto'
+
 export class User {
-  constructor(readonly id: string, readonly email: string) {}
+  id: string
+  constructor(readonly email: string) {
+    this.id = randomUUID()
+  }
 }
