@@ -1,10 +1,10 @@
 import { StatusBar } from "expo-status-bar"
 import React, { useEffect } from "react"
 import { StyleSheet, Text, View, Image } from "react-native"
-import { userService } from "./core/features/user/user.factory"
+import { getUserById } from "./core/features/user/"
 
 export default function App() {
-  const service = userService()
+  const service = getUserById()
   useEffect(() => {
     	service.findOne('asbaba').then(console.log)
   }, [])
