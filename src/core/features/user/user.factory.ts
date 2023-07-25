@@ -1,7 +1,7 @@
 import axios from "axios"
 import { HttpClient } from "../http/http-client"
 import { UserHttpService } from "./services/http-service/user-http.service"
-import { GetUserByIdService } from "./services/get-one-user/get-user-by-id.service"
+import { GetUserByIdService } from "./services/get-user-by-id/get-user-by-id.service"
 import { User } from "./user.entity"
 
 export const getUserById = () => {
