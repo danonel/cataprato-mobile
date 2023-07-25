@@ -1,23 +1,7 @@
-import { HttpClient, RequestConfig } from "../../../../http/http-client"
-import { CreateUserDTO } from "../../../dto/create-user.dto"
-import { ApiUserResponse } from "../../../types/api-response.type"
+import { HttpClient } from "../../../../http/http-client"
 import { User } from "../../../user.entity"
-import { UserHttpService } from "../../http-service/user-http.service"
+import { UserHttpServiceMock } from "../../mocks/user-http-service.mock"
 import { GetUserByIdService } from "../get-user-by-id.service"
-
-class UserHttpServiceMock extends UserHttpService {
-
-  baseUrl: string = 'any'
-  create(user: CreateUserDTO): Promise<string> {
-    return new Promise(resolve => resolve('any'))
-  }
-  findOne(id: string, options?: RequestConfig | undefined): Promise<ApiUserResponse> {
-    return new Promise(resolve => resolve({
-      email: 'asbaba',
-      id
-    }))
-  }
-}
 
 
 describe('GetUserByIdService', () => {

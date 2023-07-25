@@ -7,12 +7,12 @@ export class UserHttpService {
   constructor(private readonly client: HttpClient<User>) { }
 
 
-  async create(user: CreateUserDTO): Promise<string> {
+  async create(payload: CreateUserDTO): Promise<string> {
     const url = ''
     return await this.client.create({
       url: url,
       data: {
-        email: user.email
+        email: payload.email
       }
     })
   }
