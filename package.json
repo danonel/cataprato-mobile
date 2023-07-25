@@ -14,7 +14,9 @@
     "test:badges": "yarn test:ci  && jest-coverage-badges --input coverage/coverage-summary.json --output __badges__"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.32.0",
     "@types/axios": "^0.14.0",
+    "@types/react-query": "^1.2.9",
     "axios": "^1.4.0",
     "expo": "~40.0.0",
     "expo-status-bar": "~1.0.3",
